@@ -3,669 +3,421 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tes Buat Abang ❤️</title>
+<title>Untuk Abang 🖤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap');
+  /* ============================================================
+     ISI / TEKS BISA DIGANTI DI SINI  →  cari objek "CONTENT"
+     di bagian <script> paling bawah file ini.
+     ============================================================ */
 
   :root{
-    --bg-a: #fff1f2;
-    --bg-b: #fde3e8;
-    --card: #fffdfb;
-    --rose: #d94f70;
-    --rose-deep: #b8385a;
-    --ink: #4a2c33;
-    --ink-soft: #8a6873;
-    --blush: #f7c9d1;
-    --good: #6fa87e;
-    --good-bg: #e9f5ec;
-    --soft: #e58a76;
-    --soft-bg: #fdece7;
-    --radius: 26px;
+    --bg: #1a1420;
+    --bg-deep: #120d17;
+    --card: #241b2c;
+    --cream: #f4ecdf;
+    --cream-dim: #cdc0b8;
+    --gold: #cf9f5f;
+    --gold-soft: #e3c493;
+    --rose: #b97b83;
+    --line: rgba(244,236,223,0.14);
   }
 
-  *{ box-sizing: border-box; }
-
-  html, body{
-    margin: 0;
-    min-height: 100vh;
-    font-family: 'Karla', sans-serif;
-    color: var(--ink);
-    background: radial-gradient(circle at 15% 10%, var(--bg-b), var(--bg-a) 55%);
-    overflow-x: hidden;
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, #2c2033 0%, var(--bg) 55%),
+      var(--bg);
+    color:var(--cream);
+    font-family:'Karla', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
 
-  h1, h2, h3, .display{
-    font-family: 'Fraunces', serif;
+  .stars{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(244,236,223,.5), transparent),
+      radial-gradient(1.5px 1.5px at 70% 65%, rgba(244,236,223,.35), transparent),
+      radial-gradient(1px 1px at 85% 20%, rgba(244,236,223,.4), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(244,236,223,.3), transparent),
+      radial-gradient(1.5px 1.5px at 55% 15%, rgba(244,236,223,.4), transparent),
+      radial-gradient(1px 1px at 10% 60%, rgba(244,236,223,.3), transparent),
+      radial-gradient(1px 1px at 92% 75%, rgba(244,236,223,.3), transparent);
+    background-repeat:repeat;
+    background-size:600px 600px;
+    opacity:.6;
   }
 
-  #app{
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 32px 18px;
-    position: relative;
-    z-index: 2;
+  .wrap{
+    position:relative; z-index:1;
+    max-width:600px;
+    margin:0 auto;
+    padding:0 28px;
   }
 
-  /* ---------- Floating hearts background ---------- */
-  #hearts-layer{
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1;
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 28px 60px;
+    position:relative;
+    z-index:1;
   }
-  .heart{
-    position: absolute;
-    bottom: -60px;
-    color: var(--blush);
-    opacity: 0.55;
-    animation: floatUp linear infinite;
-    filter: drop-shadow(0 0 6px rgba(217,79,112,0.15));
+  .hero .eyebrow{
+    font-family:'Karla',sans-serif;
+    font-size:15px;
+    letter-spacing:.02em;
+    color:var(--rose);
+    margin-bottom:18px;
   }
-  .heart svg{ width: 100%; height: 100%; display:block; }
-  @keyframes floatUp{
-    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-    8%   { opacity: 0.6; }
-    100% { transform: translateY(-115vh) translateX(var(--drift, 20px)) rotate(25deg); opacity: 0; }
+  .hero .age{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(90px, 32vw, 190px);
+    line-height:.85;
+    color:var(--gold-soft);
+    margin:0;
+    text-shadow: 0 0 60px rgba(207,159,95,0.25);
+  }
+  .hero .headline{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(26px, 6vw, 38px);
+    line-height:1.25;
+    margin:22px 0 14px;
+    color:var(--cream);
+  }
+  .hero .sub{
+    font-size:16px;
+    color:var(--cream-dim);
+    max-width:380px;
+    line-height:1.6;
+  }
+  .hero .from{
+    margin-top:46px;
+    font-size:14px;
+    color:var(--cream-dim);
+    letter-spacing:.01em;
+  }
+  .hero .from span{color:var(--rose);}
+
+  .scroll-hint{
+    margin-top:56px;
+    width:1px; height:46px;
+    background:linear-gradient(to bottom, var(--gold), transparent);
+    position:relative;
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+  /* ---------- NOTE SECTIONS ---------- */
+  .note{
+    padding:70px 0;
+    border-top:1px solid var(--line);
+  }
+  .note .label{
+    font-size:13px;
+    color:var(--rose);
+    margin-bottom:16px;
+    display:block;
+  }
+  .note p{
+    font-family:'Fraunces', serif;
+    font-weight:400;
+    font-size:clamp(19px, 4vw, 23px);
+    line-height:1.65;
+    color:var(--cream);
+    margin:0 0 16px;
+  }
+  .note p:last-child{margin-bottom:0;}
+  .note p em{
+    font-style:italic;
+    color:var(--gold-soft);
   }
 
-  .glow-orb{
-    position: fixed;
-    width: 340px; height: 340px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(217,79,112,0.18), transparent 70%);
-    filter: blur(10px);
-    z-index: 0;
-    animation: pulse 6s ease-in-out infinite;
+  /* ---------- CANDLE / REVEAL INTERACTION ---------- */
+  .candle-section{
+    padding:90px 0 100px;
+    text-align:center;
+    border-top:1px solid var(--line);
   }
-  .glow-orb.one{ top: -80px; left: -100px; }
-  .glow-orb.two{ bottom: -100px; right: -80px; animation-delay: 2s; }
-  @keyframes pulse{
-    0%, 100% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.15); opacity: 1; }
+  .candle-section .label{
+    font-size:13px;
+    color:var(--rose);
+    display:block;
+    margin-bottom:10px;
   }
-
-  /* ---------- Card shell ---------- */
-  .card{
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: 0 20px 60px rgba(184, 56, 90, 0.16), 0 2px 8px rgba(184,56,90,0.08);
-    width: 100%;
-    max-width: 560px;
-    padding: 46px 38px 38px;
-    position: relative;
-    border: 1px solid rgba(217,79,112,0.08);
+  .candle-section h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-size:clamp(22px,5vw,28px);
+    margin:0 0 40px;
+    color:var(--cream);
   }
 
-  /* ---------- Welcome screen ---------- */
-  .welcome{
-    text-align: center;
+  .candle-wrap{
+    display:inline-flex;
+    flex-direction:column;
+    align-items:center;
+    cursor:pointer;
+    user-select:none;
+    background:none;
+    border:none;
+    padding:0;
+    font:inherit;
   }
-  .welcome .kicker-heart{
-    font-size: 40px;
-    display: inline-block;
-    margin-bottom: 6px;
-    animation: beat 1.6s ease-in-out infinite;
-  }
-  @keyframes beat{
-    0%, 100% { transform: scale(1); }
-    25% { transform: scale(1.12); }
-    40% { transform: scale(0.98); }
-  }
-  .welcome h1{
-    font-size: clamp(2rem, 6vw, 2.7rem);
-    font-weight: 700;
-    color: var(--rose-deep);
-    margin: 4px 0 14px;
-    line-height: 1.15;
-  }
-  .welcome p.intro{
-    font-size: 1.02rem;
-    color: var(--ink-soft);
-    line-height: 1.65;
-    max-width: 420px;
-    margin: 0 auto 30px;
-  }
-  .btn{
-    font-family: 'Karla', sans-serif;
-    font-weight: 700;
-    font-size: 1.02rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 999px;
-    padding: 16px 34px;
-    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
-    color: #fff;
-    box-shadow: 0 12px 28px rgba(184,56,90,0.32);
-    transition: transform 0.18s ease, box-shadow 0.18s ease;
-  }
-  .btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 34px rgba(184,56,90,0.4); }
-  .btn:active{ transform: translateY(0px) scale(0.98); }
-  .btn:disabled{
-    opacity: 0.45;
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
-  }
-  .btn.secondary{
-    background: transparent;
-    color: var(--rose-deep);
-    border: 2px solid var(--blush);
-    box-shadow: none;
-  }
-  .btn.secondary:hover{ background: var(--soft-bg); }
+  .candle-wrap:focus-visible{ outline:2px solid var(--gold); outline-offset:8px; border-radius:8px; }
 
-  /* ---------- Quiz screen ---------- */
-  .progress-row{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 8px;
+  .flame{
+    width:14px; height:22px;
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    background:radial-gradient(circle at 50% 70%, #fff2c9 0%, var(--gold) 45%, #a85f2e 100%);
+    margin-bottom:-2px;
+    transform-origin:bottom center;
+    animation:flicker 1.6s ease-in-out infinite;
+    filter:drop-shadow(0 0 12px rgba(207,159,95,.8));
   }
-  .progress-label{
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--rose-deep);
-    letter-spacing: 0.2px;
+  @keyframes flicker{
+    0%,100%{ transform:scale(1) rotate(-1deg); }
+    50%{ transform:scale(1.08,0.95) rotate(2deg); }
   }
-  .progress-track{
-    height: 8px;
-    border-radius: 999px;
-    background: var(--soft-bg);
-    overflow: hidden;
-    margin-bottom: 26px;
+  .candle-body{
+    width:20px; height:70px;
+    background:linear-gradient(to right, #6b5142, #8a6a55, #6b5142);
+    border-radius:3px;
   }
-  .progress-fill{
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--blush), var(--rose));
-    transition: width 0.4s ease;
+  .candle-caption{
+    margin-top:22px;
+    font-size:14px;
+    color:var(--cream-dim);
   }
-  .q-number{
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--soft);
-    text-transform: none;
-    margin-bottom: 6px;
+  .candle-wrap.blown .flame{ opacity:0; transform:scale(0); }
+  .candle-wrap.blown .candle-caption{ opacity:0; }
+
+  .smoke{
+    width:2px; height:0px;
+    background:rgba(230,225,220,.5);
+    margin:0 auto;
+    opacity:0;
   }
-  .q-text{
-    font-size: 1.28rem;
-    font-weight: 600;
-    line-height: 1.5;
-    color: var(--ink);
-    margin: 0 0 24px;
-    white-space: pre-line;
+  .candle-wrap.blown .smoke{
+    animation:smoke-rise 1.4s ease-out forwards;
   }
-  .options{
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-bottom: 22px;
-  }
-  .option{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-align: left;
-    width: 100%;
-    padding: 15px 18px;
-    border-radius: 16px;
-    border: 2px solid var(--blush);
-    background: #fff;
-    font-family: 'Karla', sans-serif;
-    font-size: 1rem;
-    color: var(--ink);
-    cursor: pointer;
-    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
-  }
-  .option:hover:not(:disabled){
-    border-color: var(--rose);
-    background: var(--soft-bg);
-  }
-  .option .opt-letter{
-    flex: none;
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    background: var(--soft-bg);
-    color: var(--rose-deep);
-    font-weight: 700;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .option.correct{
-    border-color: var(--good);
-    background: var(--good-bg);
-  }
-  .option.correct .opt-letter{ background: var(--good); color: #fff; }
-  .option.wrong{
-    border-color: var(--soft);
-    background: var(--soft-bg);
-    animation: shake 0.4s ease;
-  }
-  .option.wrong .opt-letter{ background: var(--soft); color: #fff; }
-  .option.dimmed{ opacity: 0.5; }
-  .option:disabled{ cursor: default; }
-  @keyframes shake{
-    0%, 100% { transform: translateX(0); }
-    20% { transform: translateX(-6px); }
-    40% { transform: translateX(6px); }
-    60% { transform: translateX(-4px); }
-    80% { transform: translateX(4px); }
+  @keyframes smoke-rise{
+    0%{ height:0px; opacity:.6; transform:translateX(0) scaleX(1); }
+    100%{ height:60px; opacity:0; transform:translateX(8px) scaleX(3); }
   }
 
-  .feedback{
-    display: none;
-    text-align: center;
-    border-radius: 16px;
-    padding: 16px 14px;
-    margin-bottom: 18px;
-    font-weight: 700;
-    font-size: 1.05rem;
-    animation: popIn 0.35s ease;
+  /* ---------- LETTER (final message) ---------- */
+  .letter-section{
+    padding:20px 0 110px;
   }
-  .feedback.show{ display: block; }
-  .feedback.correct{ background: var(--good-bg); color: #3f7550; }
-  .feedback.wrong{ background: var(--soft-bg); color: var(--rose-deep); }
-  @keyframes popIn{
-    0% { transform: scale(0.85); opacity: 0; }
-    60% { transform: scale(1.03); opacity: 1; }
-    100% { transform: scale(1); }
+  .letter{
+    background:linear-gradient(180deg, var(--card), #1e1626);
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:44px 34px;
+    position:relative;
+    opacity:0;
+    max-height:0;
+    overflow:hidden;
+    transition:opacity 1.1s ease, max-height 1.4s ease;
   }
-
-  .explanation-box{
-    display: none;
-    background: var(--soft-bg);
-    border-left: 4px solid var(--rose);
-    border-radius: 14px;
-    padding: 16px 18px;
-    margin-bottom: 20px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: var(--ink);
+  .letter.show{
+    opacity:1;
+    max-height:2000px;
   }
-  .explanation-box.show{ display: block; animation: popIn 0.3s ease; }
-  .explanation-box .exp-title{
-    font-weight: 700;
-    color: var(--rose-deep);
-    margin-bottom: 6px;
-    display: block;
+  .letter::before{
+    content:'';
+    position:absolute;
+    top:0; left:34px; right:34px;
+    height:1px;
+    background:linear-gradient(to right, transparent, var(--gold), transparent);
   }
-
-  .quiz-actions{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  .letter .to{
+    font-size:13px;
+    color:var(--rose);
+    margin-bottom:22px;
+    display:block;
   }
-
-  /* ---------- Result screen ---------- */
-  .result{
-    text-align: center;
+  .letter h2{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(24px, 5.5vw, 30px);
+    color:var(--gold-soft);
+    margin:0 0 26px;
+    line-height:1.3;
   }
-  .result .big-heart{
-    font-size: 46px;
-    margin-bottom: 6px;
-    display: inline-block;
-    animation: beat 1.8s ease-in-out infinite;
+  .letter p{
+    font-family:'Fraunces', serif;
+    font-size:clamp(16.5px, 3.6vw, 18px);
+    line-height:1.85;
+    color:var(--cream);
+    margin:0 0 18px;
   }
-  .result h2{
-    font-size: 1.8rem;
-    color: var(--rose-deep);
-    margin: 6px 0 18px;
-  }
-  .score-ring{
-    width: 160px; height: 160px;
-    margin: 0 auto 20px;
-    border-radius: 50%;
-    background: conic-gradient(var(--rose) calc(var(--pct, 0) * 1%), var(--soft-bg) 0);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  .score-ring::before{
-    content: "";
-    position: absolute;
-    inset: 12px;
-    border-radius: 50%;
-    background: var(--card);
-  }
-  .score-ring .score-inner{
-    position: relative;
-    z-index: 1;
-  }
-  .score-inner .pct{
-    font-family: 'Fraunces', serif;
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--rose-deep);
-    display: block;
-  }
-  .score-inner .frac{
-    font-size: 0.8rem;
-    color: var(--ink-soft);
-  }
-  .result-msg{
-    font-size: 1.05rem;
-    color: var(--ink);
-    line-height: 1.6;
-    margin: 4px 0 28px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+  .letter p:last-of-type{margin-bottom:0;}
+  .letter .sign{
+    margin-top:30px;
+    font-style:italic;
+    color:var(--gold-soft);
   }
 
-  @media (max-width: 480px){
-    .card{ padding: 34px 22px 28px; border-radius: 20px; }
-    .q-text{ font-size: 1.12rem; }
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding:50px 28px 70px;
+    border-top:1px solid var(--line);
+    font-size:13px;
+    color:var(--cream-dim);
+    letter-spacing:.02em;
+  }
+  footer .heart{
+    color:var(--rose);
+    display:block;
+    margin-bottom:10px;
+    font-size:20px;
   }
 
   @media (prefers-reduced-motion: reduce){
-    .heart, .glow-orb, .kicker-heart, .big-heart{ animation: none !important; }
+    .flame, .scroll-hint{ animation:none; }
   }
 </style>
 </head>
 <body>
 
-<div id="hearts-layer"></div>
-<div class="glow-orb one"></div>
-<div class="glow-orb two"></div>
+<div class="stars"></div>
 
-<div id="app"></div>
+<div class="wrap">
+
+  <section class="hero">
+    <span class="eyebrow" data-c="heroEyebrow"></span>
+    <p class="age" data-c="heroAge"></p>
+    <h1 class="headline" data-c="heroHeadline"></h1>
+    <p class="sub" data-c="heroSub"></p>
+    <p class="from" data-c="heroFrom"></p>
+    <div class="scroll-hint"></div>
+  </section>
+
+  <section class="note">
+    <span class="label" data-c="note1Label"></span>
+    <div data-c-html="note1Body"></div>
+  </section>
+
+  <section class="note">
+    <span class="label" data-c="note2Label"></span>
+    <div data-c-html="note2Body"></div>
+  </section>
+
+  <section class="candle-section">
+    <span class="label" data-c="candleLabel"></span>
+    <h3 data-c="candleHeadline"></h3>
+    <button class="candle-wrap" id="candleBtn" aria-label="Tiup lilinnya untuk membuka pesan">
+      <div class="flame"></div>
+      <div class="candle-body"></div>
+      <div class="smoke"></div>
+      <p class="candle-caption" data-c="candleCaption"></p>
+    </button>
+  </section>
+
+  <section class="letter-section">
+    <div class="letter" id="letterBox">
+      <span class="to" data-c="letterTo"></span>
+      <h2 data-c="letterTitle"></h2>
+      <div data-c-html="letterBody"></div>
+      <p class="sign" data-c="letterSign"></p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="heart">🤍</span>
+    <span data-c="footer"></span>
+  </footer>
+
+</div>
 
 <script>
-/* ======================= QUIZ DATA (from source material, unchanged) ======================= */
-const quizData = [
-  {
-    question: "1.000, 500, 250, 125, …",
-    options: ["50", "25", "62,5", "25,5"],
-    correct: 2,
-    explanation: "Deret tes logika aritmatika berdasarkan soal membentuk pola dibagi 2 setiap bilangannya, sehingga ditemukan jawaban pada angka berikutnya yaitu 125 : 2 = 62,5."
-  },
-  {
-    question: "100, 95, 85, 70, 50, …",
-    options: ["45", "40", "35", "25"],
-    correct: 3,
-    explanation: "Deret angka tersebut membentuk pola berikut ini: 100, (100 – 5) 95, (95 – 10) 85, (85 – 15) 70, (70 – 20) 50. Sehingga diketahui angka selanjutnya 50 + 25 = 25."
-  },
-  {
-    question: "2  4  6  8  10  …..",
-    options: ["14", "12", "16", "18"],
-    correct: 1,
-    explanation: "Jika dihitung setiap angka tersebut maka ditambah dua, seperti 4+2 = 6, 6+2 = 8. Jadi ditemukan jawabannya yaitu 10+2=12."
-  },
-  {
-    question: "365, 363, 359, … , … , 335, 323.",
-    options: ["349 dan 342", "353 dan 345", "354 dan 343", "349 dan 339"],
-    correct: 1,
-    explanation: "Setiap angka dari deret tersebut dikurangi dengan bilangan genap dimulai dari bilangan genap 2. 365 (-2), 363 (-4), 359 (-6), 353 (-8), 345 (-10), 335 (-12), 323. Sehingga angka yang memenuhi deret secara berurutan yaitu 353 dan 345 (B)."
-  },
-  {
-    question: "Jika tahun 2015 Feni berumur 3,25 windu, maka pada tahun 2002 umur Feni adalah .....",
-    options: ["13 Tahun", "8 Tahun", "11 Tahun", "17 Tahun"],
-    correct: 0,
-    explanation: "Tahun 2015 umur Feni = 3.25 windu. 1 windu = 8 tahun, jadi 3,25 windu = 26 tahun. Tahun lahir Feni = 2015 - 26 = 1989. Umur Feni pada tahun 2002 = 2002 - 1989 = 13 tahun. Jadi, jawaban yang tepat adalah 13 tahun."
-  },
-  {
-    question: "Pak Taufik adalah seorang penjahit. Dia mampu menjahit 18 baju selama 3 hari. Jumlah baju yang dapat dijahit pak Taufik dari tanggal 1 Desember sampai dengan 25 Desember adalah...",
-    options: ["170", "162", "150", "138"],
-    correct: 2,
-    explanation: "Pak Taufik bisa menjahit 18 baju dalam 3 hari, maka dalam sehari Pak Taufik bisa menjahit 6 baju. 1 Desember - 25 Desember = 25 hari. Dalam 25 hari, jumlah baju yang dijahit Pak Taufik = 6 x 25 = 150 baju. Jadi, jawaban yang tepat adalah 150 baju."
-  },
-  {
-    question: "Rata-rata berat badan 6 orang murid perempuan adalah 50 kg. Jika berat badan murid perempuan paling ringan adalah 42 kg, maka berat badan maksimal murid perempuan yang paling berat adalah ...",
-    options: ["93", "90", "88", "72"],
-    correct: 1,
-    explanation: "Rata-rata berat badan 6 orang = 50 kg, jadi jumlah berat badan = 6 x 50 = 300 kg. Jika berat badan paling ringan adalah 42 kg, dan 4 orang yang lainnya juga 42 kg juga, maka: 42 x 5 = 210 kg. Berat badan maksimal murid paling berat = 300 - 210 = 90 kg. Jadi, jawaban yang tepat adalah 90 kg."
-  }
-];
+/* ============================================================
+   SEMUA TEKS DI WEBSITE INI ADA DI SINI.
+   Ganti isinya sesuka hati — nggak perlu ubah bagian lain.
+   Boleh pakai tag <br> untuk ganti baris, dan <em>...</em>
+   untuk bikin kata jadi miring.
+   ============================================================ */
+const CONTENT = {
 
-const optionLetters = ["A", "B", "C", "D"];
+  // ===== HERO (bagian paling atas) =====
+  heroEyebrow: "untuk abang, dari aku",
+  heroAge: "24",
+  heroHeadline: "Selamat ulang tahun, sayang. 🖤",
+  heroSub: "Scroll pelan-pelan ya, abang. Ada beberapa hal yang mau aku bilang.",
+  heroFrom: "dengan sayang, <span>aku</span>",
 
-let state = {
-  screen: "welcome", // welcome | quiz | result
-  current: 0,
-  selected: null,
-  answered: false,
-  showExplanation: false,
-  correctCount: 0,
-  answers: []
+  // ===== NOTE 1 =====
+  note1Label: "buat abang",
+  note1Body: `
+    <p>Selamat ulang tahun, abang. 🖤 Nggak kerasa ya, sekarang abang udah 24 tahun.</p>
+    <p>Aku nggak pinter bikin kata-kata yang manis-manis, tapi aku mau abang tau, aku beneran bahagia bisa ngerayain hari ini buat kamu.</p>
+  `,
+
+  // ===== NOTE 2 =====
+  note2Label: "sedikit cerita",
+  note2Body: `
+    <p>Di umur abang yang ke-<em>24</em> ini, aku cuma mau bilang, makasih ya sudah hadir di hidup aku.</p>
+    <p>Aku mungkin nggak selalu bilang, tapi aku sayang banget sama kamu.</p>
+  `,
+
+  // ===== BAGIAN LILIN (interaktif) =====
+  candleLabel: "sebelum lanjut",
+  candleHeadline: "Tiup lilinnya dulu, abang.",
+  candleCaption: "(tap lilinnya)",
+
+  // ===== SURAT / PESAN UTAMA =====
+  letterTo: "untuk abang sayang",
+  letterTitle: "Selamat ulang tahun yang ke-24, abang sayang. 🖤",
+  letterBody: `
+    <p>Nggak kerasa ya, sekarang abang udah 24 tahun. Semoga di umur yang baru ini, abang selalu dikasih kesehatan, dimudahkan semua urusannya, dan satu per satu hal yang abang impikan bisa tercapai.</p>
+    <p>Aku mungkin nggak selalu bisa jadi orang yang paling sempurna buat abang, tapi aku selalu berharap yang terbaik buat kamu.</p>
+    <p>Makasih ya, sayang, untuk semua cerita, semua tawa, semua waktu, dan semua hal kecil yang pernah kita lewati.</p>
+    <p>Semoga nanti kita punya lebih banyak cerita lagi.</p>
+    <p>Sekali lagi, selamat ulang tahun, abang. 🤍</p>
+  `,
+  letterSign: "I love you.",
+
+  // ===== FOOTER =====
+  footer: "dibikin khusus buat abang, sama sayangnya aku.",
 };
 
-const app = document.getElementById("app");
+// --- render semua teks dari CONTENT ke halaman ---
+document.querySelectorAll('[data-c]').forEach(el=>{
+  const key = el.getAttribute('data-c');
+  if(CONTENT[key] !== undefined) el.innerHTML = CONTENT[key];
+});
+document.querySelectorAll('[data-c-html]').forEach(el=>{
+  const key = el.getAttribute('data-c-html');
+  if(CONTENT[key] !== undefined) el.innerHTML = CONTENT[key];
+});
 
-/* ======================= FLOATING HEARTS BACKGROUND ======================= */
-function heartSVG(){
-  return `<svg viewBox="0 0 32 29" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-    <path d="M23.6 0c-3.4 0-6.3 2-7.6 5-1.3-3-4.2-5-7.6-5C3.8 0 0 3.8 0 8.4c0 8.6 12.3 15.6 15.5 18.6.3.3.7.3 1 0C19.7 24 32 17 32 8.4 32 3.8 28.2 0 23.6 0z"/>
-  </svg>`;
-}
-function spawnHearts(container, count){
-  container.innerHTML = "";
-  for(let i=0;i<count;i++){
-    const el = document.createElement("div");
-    el.className = "heart";
-    const size = 14 + Math.random()*20;
-    const left = Math.random()*100;
-    const duration = 9 + Math.random()*10;
-    const delay = Math.random()*12;
-    const drift = (Math.random()*80 - 40) + "px";
-    el.style.left = left + "vw";
-    el.style.width = size + "px";
-    el.style.height = size + "px";
-    el.style.animationDuration = duration + "s";
-    el.style.animationDelay = delay + "s";
-    el.style.setProperty("--drift", drift);
-    el.innerHTML = heartSVG();
-    container.appendChild(el);
-  }
-}
-spawnHearts(document.getElementById("hearts-layer"), 16);
-
-/* ======================= RENDER FUNCTIONS ======================= */
-function render(){
-  if(state.screen === "welcome") return renderWelcome();
-  if(state.screen === "quiz") return renderQuiz();
-  if(state.screen === "result") return renderResult();
-}
-
-function renderWelcome(){
-  app.innerHTML = `
-    <div class="card welcome">
-      <span class="kicker-heart">💗</span>
-      <h1>Tes Buat Abang ❤️</h1>
-      <p class="intro">
-        Halo Abang sayang~ Aku bikin tes kecil ini khusus buat Abang, isinya soal-soal logika biar makin semangat latihan. Nggak usah tegang, santai aja, jawab pelan-pelan ya. Aku bakal nemenin dari awal sampai akhir, kok. Semangat, Abangku! 🥰
-      </p>
-      <button class="btn" id="start-btn">Mulai Tes ❤️</button>
-    </div>
-  `;
-  document.getElementById("start-btn").addEventListener("click", () => {
-    state.screen = "quiz";
-    state.current = 0;
-    state.correctCount = 0;
-    state.answers = [];
-    resetQuestionState();
-    render();
-  });
-}
-
-function resetQuestionState(){
-  state.selected = null;
-  state.answered = false;
-  state.showExplanation = false;
-}
-
-function renderQuiz(){
-  const total = quizData.length;
-  const idx = state.current;
-  const q = quizData[idx];
-  const pct = Math.round(((idx) / total) * 100);
-
-  const optionsHTML = q.options.map((opt, i) => {
-    let cls = "option";
-    let disabledAttr = "";
-    if(state.answered){
-      disabledAttr = "disabled";
-      if(i === q.correct){
-        cls += " correct";
-      } else if(i === state.selected){
-        cls += " wrong";
-      } else {
-        cls += " dimmed";
-      }
-    }
-    return `
-      <button class="${cls}" data-idx="${i}" ${disabledAttr}>
-        <span class="opt-letter">${optionLetters[i]}</span>
-        <span>${opt}</span>
-      </button>
-    `;
-  }).join("");
-
-  let feedbackHTML = "";
-  if(state.answered){
-    const isCorrect = state.selected === q.correct;
-    feedbackHTML = `
-      <div class="feedback show ${isCorrect ? "correct" : "wrong"}">
-        ${isCorrect ? "Betul! 🥰❤️ Pintar sekali abangku!" : "Semangat abang! 😭❤️ Coba lagi, abang pasti bisa!"}
-      </div>
-    `;
-  }
-
-  let explanationHTML = "";
-  if(state.answered){
-    explanationHTML = `
-      ${!state.showExplanation ? `<button class="btn secondary" id="show-exp-btn" style="width:100%; margin-bottom:14px;">Lihat Penjelasan 📖</button>` : ""}
-      <div class="explanation-box ${state.showExplanation ? "show" : ""}">
-        <span class="exp-title">Penjelasan</span>
-        ${q.explanation}
-      </div>
-    `;
-  }
-
-  const isLast = idx === total - 1;
-  const nextLabel = isLast ? "Lihat Hasil ❤️" : "Lanjut ke Soal Berikutnya ❤️";
-
-  app.innerHTML = `
-    <div class="card">
-      <div class="progress-row">
-        <span class="progress-label">Soal ${idx + 1} dari ${total}</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill" style="width:${pct}%;"></div></div>
-
-      <div class="q-number">Pertanyaan ${idx + 1}</div>
-      <div class="q-text">${q.question}</div>
-
-      <div class="options">${optionsHTML}</div>
-
-      ${feedbackHTML}
-      ${explanationHTML}
-
-      <div class="quiz-actions">
-        ${state.answered && state.showExplanation
-          ? `<button class="btn" id="next-btn">${nextLabel}</button>`
-          : ""}
-      </div>
-    </div>
-  `;
-
-  if(!state.answered){
-    document.querySelectorAll(".option").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const i = parseInt(btn.dataset.idx, 10);
-        selectAnswer(i);
-      });
-    });
-  }
-
-  const showExpBtn = document.getElementById("show-exp-btn");
-  if(showExpBtn){
-    showExpBtn.addEventListener("click", () => {
-      state.showExplanation = true;
-      render();
-    });
-  }
-
-  const nextBtn = document.getElementById("next-btn");
-  if(nextBtn){
-    nextBtn.addEventListener("click", goNext);
-  }
-}
-
-function selectAnswer(i){
-  if(state.answered) return; // prevent accidental double submission
-  state.selected = i;
-  state.answered = true;
-  const q = quizData[state.current];
-  const isCorrect = i === q.correct;
-  if(isCorrect) state.correctCount++;
-  state.answers.push({ q: state.current, selected: i, correct: isCorrect });
-  render();
-}
-
-function goNext(){
-  if(state.current < quizData.length - 1){
-    state.current++;
-    resetQuestionState();
-    render();
-  } else {
-    state.screen = "result";
-    render();
-  }
-}
-
-function renderResult(){
-  const total = quizData.length;
-  const correct = state.correctCount;
-  const pct = Math.round((correct / total) * 100);
-
-  let msg = "";
-  let emoji = "💗";
-  if(pct >= 80){
-    msg = "Wahhh pintar banget abangku! ❤️🥰";
-    emoji = "🥰";
-  } else if(pct >= 50){
-    msg = "Lumayan nih abang, tapi tetap pintar kok ❤️";
-    emoji = "💗";
-  } else {
-    msg = "Tidak apa-apa abang, yang penting sudah berusaha ❤️ Semangat lagi!";
-    emoji = "🤗";
-  }
-
-  app.innerHTML = `
-    <div class="card result">
-      <span class="big-heart">${emoji}</span>
-      <h2>Hasil Tes Abang</h2>
-      <div class="score-ring" style="--pct:${pct};">
-        <div class="score-inner">
-          <span class="pct">${pct}%</span>
-          <span class="frac">${correct} / ${total} benar</span>
-        </div>
-      </div>
-      <p class="result-msg">${msg}</p>
-      <button class="btn" id="restart-btn">Coba Lagi ❤️</button>
-    </div>
-  `;
-
-  document.getElementById("restart-btn").addEventListener("click", () => {
-    state = {
-      screen: "welcome",
-      current: 0,
-      selected: null,
-      answered: false,
-      showExplanation: false,
-      correctCount: 0,
-      answers: []
-    };
-    render();
-  });
-}
-
-render();
+// --- interaksi lilin: tiup lilin -> pesan muncul ---
+const candleBtn = document.getElementById('candleBtn');
+const letterBox = document.getElementById('letterBox');
+candleBtn.addEventListener('click', ()=>{
+  if(candleBtn.classList.contains('blown')) return;
+  candleBtn.classList.add('blown');
+  setTimeout(()=>{
+    letterBox.classList.add('show');
+    letterBox.scrollIntoView({behavior:'smooth', block:'center'});
+  }, 500);
+});
 </script>
+
 </body>
 </html>
