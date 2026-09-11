@@ -3,25 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Abang 🖤</title>
+<title>Untuk Abang</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   /* ============================================================
      ISI / TEKS BISA DIGANTI DI SINI  →  cari objek "CONTENT"
      di bagian <script> paling bawah file ini.
+
+     MUSIK: taruh file mp3 kamu di folder yang sama dengan file
+     ini, kasih nama "bg_music.mp3" (atau ganti nama di tag
+     <audio> di bawah). Browser tidak mengizinkan musik
+     otomatis menyala sebelum ada sentuhan/klik dari pengguna —
+     karena itu halaman ini dibuka dengan layar "tekan untuk
+     membuka" yang sekaligus langsung menyalakan musik di
+     sentuhan pertama, jadi tetap terasa "langsung ada musik"
+     tanpa perlu klik tombol musik terpisah.
      ============================================================ */
 
   :root{
-    --bg: #1a1420;
-    --bg-deep: #120d17;
-    --card: #241b2c;
-    --cream: #f4ecdf;
-    --cream-dim: #cdc0b8;
-    --gold: #cf9f5f;
-    --gold-soft: #e3c493;
-    --rose: #b97b83;
-    --line: rgba(244,236,223,0.14);
+    --bg: #08070a;
+    --bg-deep: #030203;
+    --card: #171209;
+    --cream: #f6ecd9;
+    --cream-dim: #c9bfae;
+    --gold: #cf9f52;
+    --gold-bright: #f3ce87;
+    --gold-deep: #7a5a26;
+    --line: rgba(243,206,135,0.16);
   }
 
   *{box-sizing:border-box;}
@@ -29,7 +38,8 @@
   body{
     margin:0;
     background:
-      radial-gradient(ellipse 900px 500px at 50% -10%, #2c2033 0%, var(--bg) 55%),
+      radial-gradient(ellipse 900px 520px at 50% -8%, rgba(243,206,135,0.16) 0%, transparent 60%),
+      radial-gradient(ellipse 700px 420px at 88% 102%, rgba(207,159,82,0.10) 0%, transparent 60%),
       var(--bg);
     color:var(--cream);
     font-family:'Karla', sans-serif;
@@ -40,19 +50,19 @@
   .stars{
     position:fixed; inset:0; pointer-events:none; z-index:0;
     background-image:
-      radial-gradient(1.5px 1.5px at 20% 30%, rgba(244,236,223,.5), transparent),
-      radial-gradient(1.5px 1.5px at 70% 65%, rgba(244,236,223,.35), transparent),
-      radial-gradient(1px 1px at 85% 20%, rgba(244,236,223,.4), transparent),
-      radial-gradient(1px 1px at 40% 80%, rgba(244,236,223,.3), transparent),
-      radial-gradient(1.5px 1.5px at 55% 15%, rgba(244,236,223,.4), transparent),
-      radial-gradient(1px 1px at 10% 60%, rgba(244,236,223,.3), transparent),
-      radial-gradient(1px 1px at 92% 75%, rgba(244,236,223,.3), transparent);
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(243,206,135,.45), transparent),
+      radial-gradient(1.5px 1.5px at 70% 65%, rgba(243,206,135,.3), transparent),
+      radial-gradient(1px 1px at 85% 20%, rgba(243,206,135,.35), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(243,206,135,.25), transparent),
+      radial-gradient(1.5px 1.5px at 55% 15%, rgba(243,206,135,.35), transparent),
+      radial-gradient(1px 1px at 10% 60%, rgba(243,206,135,.25), transparent),
+      radial-gradient(1px 1px at 92% 75%, rgba(243,206,135,.25), transparent);
     background-repeat:repeat;
     background-size:600px 600px;
     opacity:.6;
   }
 
-  /* ---------- floating hearts / sparkles (cute ambient layer) ---------- */
+  /* ---------- floating sparkles (ambient layer) ---------- */
   .floaties{
     position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
   }
@@ -62,7 +72,7 @@
     font-size:16px;
     opacity:0;
     animation: floatUp linear infinite;
-    filter:drop-shadow(0 0 6px rgba(207,159,95,.25));
+    filter:drop-shadow(0 0 6px rgba(207,159,82,.3));
   }
   @keyframes floatUp{
     0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
@@ -78,6 +88,52 @@
     margin:0 auto;
     padding:0 28px;
   }
+
+  /* ---------- INTRO OVERLAY (tap untuk buka + nyalain musik) ---------- */
+  .intro-overlay{
+    position:fixed; inset:0; z-index:20;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(ellipse 700px 500px at 50% 40%, rgba(243,206,135,0.10) 0%, transparent 65%),
+      var(--bg-deep);
+    text-align:center;
+    cursor:pointer;
+    transition:opacity .8s ease, visibility .8s ease;
+  }
+  .intro-overlay.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+  .intro-inner{ padding:0 32px; }
+  .intro-label{
+    font-size:13px;
+    letter-spacing:.02em;
+    color:var(--gold);
+    margin:0 0 18px;
+  }
+  .intro-title{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(24px, 6vw, 32px);
+    color:var(--gold-bright);
+    margin:0 0 34px;
+    text-shadow:0 0 40px rgba(243,206,135,.3);
+  }
+  .intro-btn{
+    border:1px solid var(--line);
+    background:rgba(243,206,135,0.06);
+    color:var(--cream);
+    font-family:'Karla', sans-serif;
+    font-size:14px;
+    letter-spacing:.02em;
+    padding:14px 30px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:transform .25s ease, background .25s ease, border-color .25s ease;
+  }
+  .intro-btn:hover{ transform:translateY(-2px); border-color:var(--gold); background:rgba(243,206,135,0.12); }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -95,7 +151,7 @@
     font-family:'Karla',sans-serif;
     font-size:15px;
     letter-spacing:.02em;
-    color:var(--rose);
+    color:var(--gold);
     margin-bottom:18px;
   }
   .hero .age{
@@ -104,9 +160,13 @@
     font-style:italic;
     font-size:clamp(90px, 32vw, 190px);
     line-height:.85;
-    color:var(--gold-soft);
+    color:var(--gold-bright);
     margin:0;
-    text-shadow: 0 0 60px rgba(207,159,95,0.25);
+    animation: goldGlow 4.5s ease-in-out infinite;
+  }
+  @keyframes goldGlow{
+    0%,100%{ text-shadow: 0 0 40px rgba(243,206,135,0.28), 0 0 90px rgba(207,159,82,0.14); }
+    50%{ text-shadow: 0 0 60px rgba(243,206,135,0.48), 0 0 120px rgba(207,159,82,0.26); }
   }
   .hero .headline{
     font-family:'Fraunces', serif;
@@ -128,7 +188,7 @@
     color:var(--cream-dim);
     letter-spacing:.01em;
   }
-  .hero .from span{color:var(--rose);}
+  .hero .from span{color:var(--gold-bright);}
 
   /* ---------- CUTE MASCOT ---------- */
   .mascot-holder{
@@ -176,7 +236,7 @@
   }
   .note .label{
     font-size:13px;
-    color:var(--rose);
+    color:var(--gold);
     margin-bottom:16px;
     display:block;
   }
@@ -191,7 +251,7 @@
   .note p:last-child{margin-bottom:0;}
   .note p em{
     font-style:italic;
-    color:var(--gold-soft);
+    color:var(--gold-bright);
   }
 
   /* ---------- CANDLE / REVEAL INTERACTION ---------- */
@@ -204,7 +264,7 @@
   }
   .candle-section .label{
     font-size:13px;
-    color:var(--rose);
+    color:var(--gold);
     display:block;
     margin-bottom:10px;
   }
@@ -232,11 +292,11 @@
   .flame{
     width:14px; height:22px;
     border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-    background:radial-gradient(circle at 50% 70%, #fff2c9 0%, var(--gold) 45%, #a85f2e 100%);
+    background:radial-gradient(circle at 50% 70%, #fff2c9 0%, var(--gold) 45%, #7a4a1e 100%);
     margin-bottom:-2px;
     transform-origin:bottom center;
     animation:flicker 1.6s ease-in-out infinite;
-    filter:drop-shadow(0 0 12px rgba(207,159,95,.8));
+    filter:drop-shadow(0 0 14px rgba(243,206,135,.9));
   }
   @keyframes flicker{
     0%,100%{ transform:scale(1) rotate(-1deg); }
@@ -244,7 +304,7 @@
   }
   .candle-body{
     width:20px; height:70px;
-    background:linear-gradient(to right, #6b5142, #8a6a55, #6b5142);
+    background:linear-gradient(to right, #2a2118, #4a3b28, #2a2118);
     border-radius:3px;
   }
   .candle-caption{
@@ -276,7 +336,7 @@
     z-index:1;
   }
   .letter{
-    background:linear-gradient(180deg, var(--card), #1e1626);
+    background:linear-gradient(180deg, var(--card), #100c07);
     border:1px solid var(--line);
     border-radius:2px;
     padding:44px 34px;
@@ -284,11 +344,13 @@
     opacity:0;
     max-height:0;
     overflow:hidden;
-    transition:opacity 1.1s ease, max-height 1.4s ease;
+    box-shadow:0 0 0 rgba(243,206,135,0);
+    transition:opacity 1.1s ease, max-height 1.4s ease, box-shadow 1.4s ease;
   }
   .letter.show{
     opacity:1;
     max-height:2000px;
+    box-shadow:0 0 60px rgba(207,159,82,0.08);
   }
   .letter::before{
     content:'';
@@ -299,7 +361,7 @@
   }
   .letter .to{
     font-size:13px;
-    color:var(--rose);
+    color:var(--gold);
     margin-bottom:22px;
     display:block;
   }
@@ -308,7 +370,7 @@
     font-weight:500;
     font-style:italic;
     font-size:clamp(24px, 5.5vw, 30px);
-    color:var(--gold-soft);
+    color:var(--gold-bright);
     margin:0 0 26px;
     line-height:1.3;
   }
@@ -323,7 +385,7 @@
   .letter .sign{
     margin-top:30px;
     font-style:italic;
-    color:var(--gold-soft);
+    color:var(--gold-bright);
   }
 
   /* ---------- FOOTER ---------- */
@@ -338,7 +400,7 @@
     z-index:1;
   }
   footer .heart{
-    color:var(--rose);
+    color:var(--gold);
     display:block;
     margin-bottom:10px;
     font-size:20px;
@@ -353,7 +415,7 @@
     display:flex;
     align-items:center;
     gap:9px;
-    background:rgba(36,27,44,0.88);
+    background:rgba(23,18,9,0.88);
     border:1px solid var(--line);
     color:var(--cream);
     font-family:'Karla',sans-serif;
@@ -362,10 +424,10 @@
     border-radius:999px;
     cursor:pointer;
     backdrop-filter:blur(6px);
-    box-shadow:0 6px 22px rgba(0,0,0,.35);
-    transition:transform .2s ease, background .2s ease;
+    box-shadow:0 6px 22px rgba(0,0,0,.45);
+    transition:transform .2s ease, background .2s ease, border-color .2s ease;
   }
-  .music-toggle:hover{ transform:translateY(-2px); }
+  .music-toggle:hover{ transform:translateY(-2px); border-color:var(--gold); }
   .music-toggle:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
   .note-icon{
     width:20px; height:20px;
@@ -379,7 +441,7 @@
   }
   .music-bars{ display:flex; align-items:flex-end; gap:2px; height:12px; }
   .music-bars span{
-    width:2.5px; background:var(--gold-soft); border-radius:2px; height:4px;
+    width:2.5px; background:var(--gold-bright); border-radius:2px; height:4px;
     animation:none;
   }
   .music-toggle.playing .music-bars span{ animation:bar 0.9s ease-in-out infinite; }
@@ -392,7 +454,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .flame, .scroll-hint, .mascot, .floaty, .music-toggle.playing .note-icon, .music-bars span{ animation:none !important; }
+    .flame, .scroll-hint, .mascot, .floaty, .music-toggle.playing .note-icon, .music-bars span, .hero .age{ animation:none !important; }
   }
 </style>
 </head>
@@ -402,6 +464,15 @@
 <div class="floaties" id="floaties"></div>
 
 <audio id="bgMusic" src="bg_music.mp3" loop preload="auto"></audio>
+
+<div class="intro-overlay" id="introOverlay">
+  <div class="intro-inner">
+    <p class="intro-label" data-c="introLabel"></p>
+    <p class="intro-title" data-c="introTitle"></p>
+    <button class="intro-btn" id="introBtn" data-c="introBtn"></button>
+  </div>
+</div>
+
 <button class="music-toggle" id="musicToggle" aria-pressed="false">
   <span class="note-icon">🎵</span>
   <span class="music-bars"><span></span><span></span><span></span></span>
@@ -418,23 +489,23 @@
 
     <div class="mascot-holder">
       <svg class="mascot" id="mascot" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <ellipse cx="60" cy="108" rx="30" ry="6" fill="#000" opacity="0.18"/>
-        <path d="M60 20c26 0 42 18 42 44s-18 46-42 46-42-20-42-46S34 20 60 20z" fill="#efc9c9"/>
-        <ellipse cx="30" cy="70" rx="9" ry="7" fill="#f3d7d2"/>
-        <ellipse cx="90" cy="70" rx="9" ry="7" fill="#f3d7d2"/>
-        <circle cx="42" cy="70" r="6" fill="#e39a95" opacity="0.7"/>
-        <circle cx="78" cy="70" r="6" fill="#e39a95" opacity="0.7"/>
+        <ellipse cx="60" cy="108" rx="30" ry="6" fill="#000" opacity="0.25"/>
+        <path d="M60 20c26 0 42 18 42 44s-18 46-42 46-42-20-42-46S34 20 60 20z" fill="#f4ecd9"/>
+        <ellipse cx="30" cy="70" rx="9" ry="7" fill="#f8f0e0"/>
+        <ellipse cx="90" cy="70" rx="9" ry="7" fill="#f8f0e0"/>
+        <circle cx="42" cy="70" r="6" fill="#e3bd7e" opacity="0.65"/>
+        <circle cx="78" cy="70" r="6" fill="#e3bd7e" opacity="0.65"/>
         <g class="eye">
-          <ellipse cx="47" cy="60" rx="4.2" ry="5.4" fill="#3a2a2f"/>
+          <ellipse cx="47" cy="60" rx="4.2" ry="5.4" fill="#241c12"/>
           <circle cx="48.4" cy="57.8" r="1.3" fill="#fff"/>
         </g>
         <g class="eye">
-          <ellipse cx="73" cy="60" rx="4.2" ry="5.4" fill="#3a2a2f"/>
+          <ellipse cx="73" cy="60" rx="4.2" ry="5.4" fill="#241c12"/>
           <circle cx="74.4" cy="57.8" r="1.3" fill="#fff"/>
         </g>
-        <path d="M53 74q7 6 14 0" stroke="#3a2a2f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
-        <path d="M46 34c4-8 24-8 28 0" stroke="#cf9f5f" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M55 30l5-9 5 9z" fill="#cf9f5f"/>
+        <path d="M53 74q7 6 14 0" stroke="#241c12" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M46 34c4-8 24-8 28 0" stroke="#cf9f52" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M55 30l5-9 5 9z" fill="#cf9f52"/>
       </svg>
     </div>
 
@@ -473,7 +544,7 @@
   </section>
 
   <footer>
-    <span class="heart">🤍</span>
+    <span class="heart">🖤</span>
     <span data-c="footer"></span>
   </footer>
 
@@ -488,50 +559,55 @@
    ============================================================ */
 const CONTENT = {
 
+  // ===== LAYAR PEMBUKA (tap untuk masuk + nyalain musik) =====
+  introLabel: "untuk abang",
+  introTitle: "Ada sesuatu buat kamu.",
+  introBtn: "tekan untuk membuka",
+
   // ===== HERO (bagian paling atas) =====
   heroEyebrow: "untuk abang, dari aku",
   heroAge: "24",
-  heroHeadline: "Selamat ulang tahun, sayang. 🖤",
-  heroSub: "Scroll pelan-pelan ya, abang. Ada beberapa hal yang mau aku bilang.",
-  heroFrom: "dengan sayang, <span>aku</span>",
+  heroHeadline: "Selamat ulang tahun, abang.",
+  heroSub: "Pelan-pelan aja scrollnya. Ada beberapa hal yang mau aku sampaikan.",
+  heroFrom: "dari aku, <span>dengan sayang</span>",
 
   // ===== NOTE 1 =====
-  note1Label: "buat abang",
+  note1Label: "untuk abang",
   note1Body: `
-    <p>Selamat ulang tahun, abang. 🖤 Nggak kerasa ya, sekarang abang udah 24 tahun.</p>
-    <p>Aku nggak jago bikin kata-kata manis, tapi aku beneran seneng bisa ngerayain hari ini buat kamu.</p>
+    <p>Selamat ulang tahun, abang. Sekarang usia abang genap 24 tahun.</p>
+    <p>Aku senang bisa merayakan hari ini bersama kamu, meski cuma lewat halaman kecil ini.</p>
   `,
 
   // ===== NOTE 2 =====
   note2Label: "sedikit cerita",
   note2Body: `
-    <p>Di umur abang yang ke-<em>24</em> ini, aku cuma mau bilang, makasih ya udah ada di hidup aku.</p>
-    <p>Aku mungkin nggak selalu bilang, tapi aku sayang banget sama kamu.</p>
+    <p>Di umur yang baru ini, aku cuma ingin bilang terima kasih sudah ada di hidupku.</p>
+    <p>Tidak semua hal perlu diucapkan setiap hari untuk terasa nyata, tapi aku sayang kamu, <em>lebih</em> dari yang biasa aku tunjukkan.</p>
   `,
 
   // ===== BAGIAN LILIN (interaktif) =====
   candleLabel: "sebelum lanjut",
   candleHeadline: "Tiup lilinnya dulu, abang.",
-  candleCaption: "(tap lilinnya)",
+  candleCaption: "(tekan lilinnya)",
 
   // ===== SURAT / PESAN UTAMA =====
-  letterTo: "untuk abang sayang",
-  letterTitle: "Selamat ulang tahun yang ke-24, abang sayang. 🖤",
+  letterTo: "untuk abang",
+  letterTitle: "Selamat ulang tahun yang ke-24, abang.",
   letterBody: `
-    <p>Nggak kerasa ya, sekarang abang udah 24 tahun. Semoga di umur yang baru ini, abang selalu sehat, dimudahkan semua urusannya, dan pelan-pelan hal yang abang impikan bisa tercapai.</p>
-    <p>Aku mungkin nggak selalu bisa jadi yang paling sempurna buat abang, tapi aku selalu pengen yang terbaik buat kamu.</p>
-    <p>Makasih ya, sayang, untuk semua cerita, semua tawa, semua waktu, dan hal-hal kecil yang udah kita lewatin bareng.</p>
-    <p>Semoga nanti kita punya lebih banyak cerita lagi.</p>
-    <p>Sekali lagi, selamat ulang tahun, abang. 🤍</p>
+    <p>Semoga di usia yang baru ini, abang selalu sehat, urusannya dimudahkan, dan pelan-pelan semua yang diimpikan bisa tercapai.</p>
+    <p>Aku mungkin belum jadi yang paling sempurna buat abang, tapi aku selalu berusaha memberi yang terbaik.</p>
+    <p>Terima kasih untuk setiap cerita, tawa, waktu, dan hal-hal kecil yang sudah kita lewati bersama.</p>
+    <p>Semoga masih ada banyak cerita lain yang menanti kita.</p>
+    <p>Sekali lagi, selamat ulang tahun, abang.</p>
   `,
   letterSign: "I love you.",
 
   // ===== FOOTER =====
-  footer: "dibikin khusus buat abang, sama sayangnya aku.",
+  footer: "dibuat khusus untuk abang, oleh sayangnya.",
 
   // ===== MUSIK =====
-  musicOff: "nyalain musik",
-  musicOn: "lagi muter",
+  musicOff: "putar musik",
+  musicOn: "sedang diputar",
 };
 
 // --- render semua teks dari CONTENT ke halaman ---
@@ -575,7 +651,7 @@ mascot.addEventListener('click', ()=>{
 // --- hati & bintang kecil yang melayang pelan di background ---
 if(!reduceMotion){
   const layer = document.getElementById('floaties');
-  const glyphs = ['🤍','✦','🖤','·'];
+  const glyphs = ['🖤','✦','◆','·'];
   const count = window.innerWidth < 640 ? 9 : 14;
   for(let i=0;i<count;i++){
     const el = document.createElement('span');
@@ -590,27 +666,42 @@ if(!reduceMotion){
   }
 }
 
-// --- toggle musik latar ---
+// --- musik latar ---
 const bgMusic = document.getElementById('bgMusic');
 const musicToggle = document.getElementById('musicToggle');
 const musicLabel = document.getElementById('musicLabel');
 bgMusic.volume = 0.45;
 let playing = false;
+
+function setPlayingState(isPlaying){
+  playing = isPlaying;
+  musicToggle.classList.toggle('playing', isPlaying);
+  musicToggle.setAttribute('aria-pressed', String(isPlaying));
+  musicLabel.textContent = isPlaying ? CONTENT.musicOn : CONTENT.musicOff;
+}
+
 musicToggle.addEventListener('click', ()=>{
   if(!playing){
-    bgMusic.play().then(()=>{
-      playing = true;
-      musicToggle.classList.add('playing');
-      musicToggle.setAttribute('aria-pressed','true');
-      musicLabel.textContent = CONTENT.musicOn;
-    }).catch(()=>{ /* diam-diam gagal, biarin user coba lagi */ });
+    bgMusic.play().then(()=> setPlayingState(true)).catch(()=>{ /* diam-diam gagal, biarin user coba lagi */ });
   } else {
     bgMusic.pause();
-    playing = false;
-    musicToggle.classList.remove('playing');
-    musicToggle.setAttribute('aria-pressed','false');
-    musicLabel.textContent = CONTENT.musicOff;
+    setPlayingState(false);
   }
+});
+
+// --- layar pembuka: sentuhan pertama = buka halaman + langsung nyalain musik ---
+// (browser mewajibkan ada interaksi pengguna sebelum audio boleh bunyi,
+// jadi ini cara paling dekat dengan "musik langsung keputer")
+const introOverlay = document.getElementById('introOverlay');
+const introBtn = document.getElementById('introBtn');
+
+function openIntro(){
+  bgMusic.play().then(()=> setPlayingState(true)).catch(()=> setPlayingState(false));
+  introOverlay.classList.add('hidden');
+}
+introBtn.addEventListener('click', openIntro);
+introOverlay.addEventListener('click', (e)=>{
+  if(e.target === introOverlay) openIntro();
 });
 </script>
 
