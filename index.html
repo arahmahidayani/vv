@@ -52,8 +52,28 @@
     opacity:.6;
   }
 
+  /* ---------- floating hearts / sparkles (cute ambient layer) ---------- */
+  .floaties{
+    position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
+  }
+  .floaty{
+    position:absolute;
+    bottom:-40px;
+    font-size:16px;
+    opacity:0;
+    animation: floatUp linear infinite;
+    filter:drop-shadow(0 0 6px rgba(207,159,95,.25));
+  }
+  @keyframes floatUp{
+    0%{ transform:translateY(0) translateX(0) rotate(0deg); opacity:0; }
+    10%{ opacity:.55; }
+    50%{ transform:translateY(-52vh) translateX(14px) rotate(8deg); }
+    90%{ opacity:.35; }
+    100%{ transform:translateY(-102vh) translateX(-10px) rotate(-6deg); opacity:0; }
+  }
+
   .wrap{
-    position:relative; z-index:1;
+    position:relative; z-index:2;
     max-width:600px;
     margin:0 auto;
     padding:0 28px;
@@ -67,7 +87,7 @@
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:80px 28px 60px;
+    padding:80px 28px 40px;
     position:relative;
     z-index:1;
   }
@@ -103,15 +123,43 @@
     line-height:1.6;
   }
   .hero .from{
-    margin-top:46px;
+    margin-top:36px;
     font-size:14px;
     color:var(--cream-dim);
     letter-spacing:.01em;
   }
   .hero .from span{color:var(--rose);}
 
+  /* ---------- CUTE MASCOT ---------- */
+  .mascot-holder{
+    margin-top:28px;
+    display:flex;
+    justify-content:center;
+  }
+  .mascot{
+    width:108px; height:108px;
+    animation: breathe 3.4s ease-in-out infinite;
+    transform-origin:50% 85%;
+    cursor:pointer;
+  }
+  @keyframes breathe{
+    0%,100%{ transform:scale(1,1) translateY(0); }
+    50%{ transform:scale(1.035,0.965) translateY(-3px); }
+  }
+  .mascot .eye{ transition:transform .12s ease; transform-origin:center; }
+  .mascot.blink .eye{ transform:scaleY(0.12); }
+  .mascot.jump{ animation: jumpHappy 0.9s ease; }
+  @keyframes jumpHappy{
+    0%{ transform:translateY(0) scale(1,1); }
+    25%{ transform:translateY(-22px) scale(0.96,1.08); }
+    45%{ transform:translateY(-26px) scale(1.04,0.94); }
+    65%{ transform:translateY(0) scale(0.94,1.08); }
+    85%{ transform:translateY(-6px) scale(1.02,0.98); }
+    100%{ transform:translateY(0) scale(1,1); }
+  }
+
   .scroll-hint{
-    margin-top:56px;
+    margin-top:38px;
     width:1px; height:46px;
     background:linear-gradient(to bottom, var(--gold), transparent);
     position:relative;
@@ -123,6 +171,8 @@
   .note{
     padding:70px 0;
     border-top:1px solid var(--line);
+    position:relative;
+    z-index:1;
   }
   .note .label{
     font-size:13px;
@@ -149,6 +199,8 @@
     padding:90px 0 100px;
     text-align:center;
     border-top:1px solid var(--line);
+    position:relative;
+    z-index:1;
   }
   .candle-section .label{
     font-size:13px;
@@ -220,6 +272,8 @@
   /* ---------- LETTER (final message) ---------- */
   .letter-section{
     padding:20px 0 110px;
+    position:relative;
+    z-index:1;
   }
   .letter{
     background:linear-gradient(180deg, var(--card), #1e1626);
@@ -280,6 +334,8 @@
     font-size:13px;
     color:var(--cream-dim);
     letter-spacing:.02em;
+    position:relative;
+    z-index:1;
   }
   footer .heart{
     color:var(--rose);
@@ -288,14 +344,69 @@
     font-size:20px;
   }
 
+  /* ---------- MUSIC TOGGLE ---------- */
+  .music-toggle{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:5;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    background:rgba(36,27,44,0.88);
+    border:1px solid var(--line);
+    color:var(--cream);
+    font-family:'Karla',sans-serif;
+    font-size:13px;
+    padding:10px 16px 10px 12px;
+    border-radius:999px;
+    cursor:pointer;
+    backdrop-filter:blur(6px);
+    box-shadow:0 6px 22px rgba(0,0,0,.35);
+    transition:transform .2s ease, background .2s ease;
+  }
+  .music-toggle:hover{ transform:translateY(-2px); }
+  .music-toggle:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+  .note-icon{
+    width:20px; height:20px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+  }
+  .music-toggle.playing .note-icon{ animation: noteBob 1s ease-in-out infinite; }
+  @keyframes noteBob{
+    0%,100%{ transform:translateY(0) rotate(0deg); }
+    50%{ transform:translateY(-3px) rotate(-8deg); }
+  }
+  .music-bars{ display:flex; align-items:flex-end; gap:2px; height:12px; }
+  .music-bars span{
+    width:2.5px; background:var(--gold-soft); border-radius:2px; height:4px;
+    animation:none;
+  }
+  .music-toggle.playing .music-bars span{ animation:bar 0.9s ease-in-out infinite; }
+  .music-bars span:nth-child(1){ animation-delay:0s; }
+  .music-bars span:nth-child(2){ animation-delay:.15s; }
+  .music-bars span:nth-child(3){ animation-delay:.3s; }
+  @keyframes bar{
+    0%,100%{ height:4px; }
+    50%{ height:12px; }
+  }
+
   @media (prefers-reduced-motion: reduce){
-    .flame, .scroll-hint{ animation:none; }
+    .flame, .scroll-hint, .mascot, .floaty, .music-toggle.playing .note-icon, .music-bars span{ animation:none !important; }
   }
 </style>
 </head>
 <body>
 
 <div class="stars"></div>
+<div class="floaties" id="floaties"></div>
+
+<audio id="bgMusic" src="bg_music.mp3" loop preload="auto"></audio>
+<button class="music-toggle" id="musicToggle" aria-pressed="false">
+  <span class="note-icon">🎵</span>
+  <span class="music-bars"><span></span><span></span><span></span></span>
+  <span id="musicLabel" data-c="musicOff"></span>
+</button>
 
 <div class="wrap">
 
@@ -304,6 +415,29 @@
     <p class="age" data-c="heroAge"></p>
     <h1 class="headline" data-c="heroHeadline"></h1>
     <p class="sub" data-c="heroSub"></p>
+
+    <div class="mascot-holder">
+      <svg class="mascot" id="mascot" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <ellipse cx="60" cy="108" rx="30" ry="6" fill="#000" opacity="0.18"/>
+        <path d="M60 20c26 0 42 18 42 44s-18 46-42 46-42-20-42-46S34 20 60 20z" fill="#efc9c9"/>
+        <ellipse cx="30" cy="70" rx="9" ry="7" fill="#f3d7d2"/>
+        <ellipse cx="90" cy="70" rx="9" ry="7" fill="#f3d7d2"/>
+        <circle cx="42" cy="70" r="6" fill="#e39a95" opacity="0.7"/>
+        <circle cx="78" cy="70" r="6" fill="#e39a95" opacity="0.7"/>
+        <g class="eye">
+          <ellipse cx="47" cy="60" rx="4.2" ry="5.4" fill="#3a2a2f"/>
+          <circle cx="48.4" cy="57.8" r="1.3" fill="#fff"/>
+        </g>
+        <g class="eye">
+          <ellipse cx="73" cy="60" rx="4.2" ry="5.4" fill="#3a2a2f"/>
+          <circle cx="74.4" cy="57.8" r="1.3" fill="#fff"/>
+        </g>
+        <path d="M53 74q7 6 14 0" stroke="#3a2a2f" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M46 34c4-8 24-8 28 0" stroke="#cf9f5f" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M55 30l5-9 5 9z" fill="#cf9f5f"/>
+      </svg>
+    </div>
+
     <p class="from" data-c="heroFrom"></p>
     <div class="scroll-hint"></div>
   </section>
@@ -365,13 +499,13 @@ const CONTENT = {
   note1Label: "buat abang",
   note1Body: `
     <p>Selamat ulang tahun, abang. 🖤 Nggak kerasa ya, sekarang abang udah 24 tahun.</p>
-    <p>Aku nggak pinter bikin kata-kata yang manis-manis, tapi aku mau abang tau, aku beneran bahagia bisa ngerayain hari ini buat kamu.</p>
+    <p>Aku nggak jago bikin kata-kata manis, tapi aku beneran seneng bisa ngerayain hari ini buat kamu.</p>
   `,
 
   // ===== NOTE 2 =====
   note2Label: "sedikit cerita",
   note2Body: `
-    <p>Di umur abang yang ke-<em>24</em> ini, aku cuma mau bilang, makasih ya sudah hadir di hidup aku.</p>
+    <p>Di umur abang yang ke-<em>24</em> ini, aku cuma mau bilang, makasih ya udah ada di hidup aku.</p>
     <p>Aku mungkin nggak selalu bilang, tapi aku sayang banget sama kamu.</p>
   `,
 
@@ -384,9 +518,9 @@ const CONTENT = {
   letterTo: "untuk abang sayang",
   letterTitle: "Selamat ulang tahun yang ke-24, abang sayang. 🖤",
   letterBody: `
-    <p>Nggak kerasa ya, sekarang abang udah 24 tahun. Semoga di umur yang baru ini, abang selalu dikasih kesehatan, dimudahkan semua urusannya, dan satu per satu hal yang abang impikan bisa tercapai.</p>
-    <p>Aku mungkin nggak selalu bisa jadi orang yang paling sempurna buat abang, tapi aku selalu berharap yang terbaik buat kamu.</p>
-    <p>Makasih ya, sayang, untuk semua cerita, semua tawa, semua waktu, dan semua hal kecil yang pernah kita lewati.</p>
+    <p>Nggak kerasa ya, sekarang abang udah 24 tahun. Semoga di umur yang baru ini, abang selalu sehat, dimudahkan semua urusannya, dan pelan-pelan hal yang abang impikan bisa tercapai.</p>
+    <p>Aku mungkin nggak selalu bisa jadi yang paling sempurna buat abang, tapi aku selalu pengen yang terbaik buat kamu.</p>
+    <p>Makasih ya, sayang, untuk semua cerita, semua tawa, semua waktu, dan hal-hal kecil yang udah kita lewatin bareng.</p>
     <p>Semoga nanti kita punya lebih banyak cerita lagi.</p>
     <p>Sekali lagi, selamat ulang tahun, abang. 🤍</p>
   `,
@@ -394,6 +528,10 @@ const CONTENT = {
 
   // ===== FOOTER =====
   footer: "dibikin khusus buat abang, sama sayangnya aku.",
+
+  // ===== MUSIK =====
+  musicOff: "nyalain musik",
+  musicOn: "lagi muter",
 };
 
 // --- render semua teks dari CONTENT ke halaman ---
@@ -406,16 +544,73 @@ document.querySelectorAll('[data-c-html]').forEach(el=>{
   if(CONTENT[key] !== undefined) el.innerHTML = CONTENT[key];
 });
 
-// --- interaksi lilin: tiup lilin -> pesan muncul ---
+// --- interaksi lilin: tiup lilin -> pesan muncul + maskotnya loncat seneng ---
 const candleBtn = document.getElementById('candleBtn');
 const letterBox = document.getElementById('letterBox');
+const mascot = document.getElementById('mascot');
 candleBtn.addEventListener('click', ()=>{
   if(candleBtn.classList.contains('blown')) return;
   candleBtn.classList.add('blown');
+  mascot.classList.add('jump');
+  setTimeout(()=> mascot.classList.remove('jump'), 950);
   setTimeout(()=>{
     letterBox.classList.add('show');
     letterBox.scrollIntoView({behavior:'smooth', block:'center'});
   }, 500);
+});
+
+// --- maskot: kedip pelan-pelan tiap beberapa detik, loncat kalau di-tap ---
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!reduceMotion){
+  setInterval(()=>{
+    mascot.classList.add('blink');
+    setTimeout(()=> mascot.classList.remove('blink'), 160);
+  }, 2600 + Math.random()*1400);
+}
+mascot.addEventListener('click', ()=>{
+  mascot.classList.add('jump');
+  setTimeout(()=> mascot.classList.remove('jump'), 950);
+});
+
+// --- hati & bintang kecil yang melayang pelan di background ---
+if(!reduceMotion){
+  const layer = document.getElementById('floaties');
+  const glyphs = ['🤍','✦','🖤','·'];
+  const count = window.innerWidth < 640 ? 9 : 14;
+  for(let i=0;i<count;i++){
+    const el = document.createElement('span');
+    el.className = 'floaty';
+    el.textContent = glyphs[Math.floor(Math.random()*glyphs.length)];
+    el.style.left = (Math.random()*100) + 'vw';
+    el.style.fontSize = (12 + Math.random()*10) + 'px';
+    const dur = 14 + Math.random()*12;
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = (-Math.random()*dur) + 's';
+    layer.appendChild(el);
+  }
+}
+
+// --- toggle musik latar ---
+const bgMusic = document.getElementById('bgMusic');
+const musicToggle = document.getElementById('musicToggle');
+const musicLabel = document.getElementById('musicLabel');
+bgMusic.volume = 0.45;
+let playing = false;
+musicToggle.addEventListener('click', ()=>{
+  if(!playing){
+    bgMusic.play().then(()=>{
+      playing = true;
+      musicToggle.classList.add('playing');
+      musicToggle.setAttribute('aria-pressed','true');
+      musicLabel.textContent = CONTENT.musicOn;
+    }).catch(()=>{ /* diam-diam gagal, biarin user coba lagi */ });
+  } else {
+    bgMusic.pause();
+    playing = false;
+    musicToggle.classList.remove('playing');
+    musicToggle.setAttribute('aria-pressed','false');
+    musicLabel.textContent = CONTENT.musicOff;
+  }
 });
 </script>
 
