@@ -105,12 +105,28 @@
     visibility:hidden;
     pointer-events:none;
   }
-  .intro-inner{ padding:0 32px; }
+  .intro-inner{ padding:0 32px; position:relative; }
+  .intro-sparkles{
+    position:absolute;
+    inset:-60px -40px;
+    pointer-events:none;
+    z-index:0;
+  }
+  .intro-sparkle{
+    position:absolute;
+    color:var(--gold-bright);
+    font-size:14px;
+    opacity:0;
+    animation: sparkleTwinkle 3.2s ease-in-out infinite;
+    filter:drop-shadow(0 0 6px rgba(243,206,135,.6));
+  }
   .intro-label{
     font-size:13px;
     letter-spacing:.02em;
     color:var(--gold);
     margin:0 0 18px;
+    position:relative;
+    z-index:1;
   }
   .intro-title{
     font-family:'Fraunces', serif;
@@ -120,6 +136,74 @@
     color:var(--gold-bright);
     margin:0 0 34px;
     text-shadow:0 0 40px rgba(243,206,135,.3);
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- AMPLOP INTERAKTIF DI LAYAR PEMBUKA ---------- */
+  .envelope-wrap{
+    margin:0 auto 30px;
+    width:104px;
+    cursor:pointer;
+    position:relative;
+    z-index:1;
+  }
+  .envelope-wrap:focus-visible .envelope-body{ outline:2px solid var(--gold); outline-offset:4px; }
+  .envelope-scene{
+    position:relative;
+    width:104px;
+    height:70px;
+    margin:0 auto;
+    perspective:600px;
+    animation: breathe 3.4s ease-in-out infinite;
+  }
+  .envelope-letter{
+    position:absolute;
+    left:12px; right:12px; top:-6px;
+    height:52px;
+    background:linear-gradient(180deg,#faf3e2,#f0e4c8);
+    border-radius:2px;
+    box-shadow:0 6px 18px rgba(0,0,0,.35);
+    transform:translateY(8px);
+    transition:transform .7s cubic-bezier(.34,1.56,.64,1);
+    z-index:1;
+  }
+  .envelope-body{
+    position:absolute;
+    left:0; right:0; bottom:0; top:14px;
+    background:linear-gradient(160deg,#1f1710,#120d08);
+    border:1px solid var(--line);
+    border-radius:4px;
+    box-shadow:0 12px 28px rgba(0,0,0,.5);
+    z-index:3;
+  }
+  .envelope-seal{
+    position:absolute; left:50%; top:60%;
+    transform:translate(-50%,-50%);
+    font-size:15px;
+    filter:drop-shadow(0 0 6px rgba(243,206,135,.55));
+    z-index:5;
+    transition:opacity .3s ease;
+  }
+  .envelope-flap{
+    position:absolute;
+    left:0; top:14px; width:100%; height:0;
+    border-left:52px solid transparent;
+    border-right:52px solid transparent;
+    border-top:34px solid #241c12;
+    transform-origin:top center;
+    transition:transform .65s cubic-bezier(.34,1.56,.64,1);
+    z-index:4;
+    filter:drop-shadow(0 2px 5px rgba(0,0,0,.35));
+  }
+  .envelope-wrap.opening .envelope-flap{ transform:rotateX(150deg); }
+  .envelope-wrap.opening .envelope-letter{ transform:translateY(-34px); }
+  .envelope-wrap.opening .envelope-seal{ opacity:0; }
+  .envelope-hint{
+    margin-top:16px;
+    font-size:12px;
+    color:var(--cream-dim);
+    letter-spacing:.02em;
   }
   .intro-btn{
     border:1px solid var(--line);
@@ -190,6 +274,61 @@
     92%{  filter:brightness(1.14) drop-shadow(0 0 54px rgba(243,206,135,0.5))  drop-shadow(0 0 108px rgba(207,159,82,0.27)); }
     100%{ filter:brightness(1)    drop-shadow(0 0 34px rgba(243,206,135,0.30)) drop-shadow(0 0 80px rgba(207,159,82,0.15)); }
   }
+  /* ---------- HIASAN DI ATAS ANGKA UMUR (lilin kecil + kelip bintang) ---------- */
+  .age-wrap{
+    position:relative;
+    display:inline-block;
+  }
+  .age-candles{
+    display:flex;
+    justify-content:center;
+    gap:22px;
+    margin-bottom:-6px;
+    position:relative;
+    z-index:2;
+  }
+  .mini-candle{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .mini-flame{
+    width:7px; height:11px;
+    border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+    background:radial-gradient(circle at 50% 70%, #fff2c9 0%, var(--gold) 45%, #7a4a1e 100%);
+    margin-bottom:-1px;
+    transform-origin:bottom center;
+    filter:drop-shadow(0 0 8px rgba(243,206,135,.85));
+    animation:flicker 1.4s ease-in-out infinite;
+  }
+  .mini-candle:nth-child(2) .mini-flame{ animation-delay:.35s; }
+  .mini-stick{
+    width:9px; height:30px;
+    background:linear-gradient(to right, #2a2118, #4a3b28, #2a2118);
+    border-radius:2px;
+  }
+  .age-sparkles{
+    position:absolute;
+    inset:-18px -28px;
+    pointer-events:none;
+    z-index:1;
+  }
+  .age-sparkle{
+    position:absolute;
+    color:var(--gold-bright);
+    font-size:13px;
+    opacity:0;
+    animation: sparkleTwinkle 2.8s ease-in-out infinite;
+    filter:drop-shadow(0 0 6px rgba(243,206,135,.6));
+  }
+  @keyframes sparkleTwinkle{
+    0%,100%{ opacity:0; transform:scale(.4) rotate(0deg); }
+    50%{ opacity:1; transform:scale(1) rotate(14deg); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .mini-flame, .age-sparkle{ animation:none !important; opacity:.7; }
+  }
+
   .hero .headline{
     font-family:'Fraunces', serif;
     font-weight:500;
@@ -217,6 +356,7 @@
     margin-top:28px;
     display:flex;
     justify-content:center;
+    position:relative;
   }
   .mascot{
     width:108px; height:108px;
@@ -238,6 +378,39 @@
     65%{ transform:translateY(0) scale(0.94,1.08); }
     85%{ transform:translateY(-6px) scale(1.02,0.98); }
     100%{ transform:translateY(0) scale(1,1); }
+  }
+
+  /* --- balon obrolan random pas maskot diklik --- */
+  .mascot-bubble{
+    position:absolute;
+    top:-6px; left:50%;
+    transform:translateX(-50%);
+    background:var(--gold-bright);
+    color:#241c12;
+    padding:7px 14px;
+    border-radius:14px;
+    font-family:'Karla', sans-serif;
+    font-size:12.5px;
+    font-weight:500;
+    white-space:nowrap;
+    pointer-events:none;
+    box-shadow:0 4px 16px rgba(0,0,0,.35);
+    animation: bubblePop 1.6s ease forwards;
+  }
+  .mascot-bubble::after{
+    content:'';
+    position:absolute;
+    bottom:-6px; left:50%;
+    transform:translateX(-50%);
+    border-width:6px 6px 0 6px;
+    border-style:solid;
+    border-color:var(--gold-bright) transparent transparent transparent;
+  }
+  @keyframes bubblePop{
+    0%{ opacity:0; transform:translateX(-50%) translateY(8px) scale(.9); }
+    15%{ opacity:1; transform:translateX(-50%) translateY(0) scale(1); }
+    82%{ opacity:1; }
+    100%{ opacity:0; transform:translateX(-50%) translateY(-12px) scale(.96); }
   }
 
   .scroll-hint{
@@ -476,7 +649,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .flame, .scroll-hint, .mascot, .floaty, .music-toggle.playing .note-icon, .music-bars span, .hero .age{ animation:none !important; }
+    .flame, .scroll-hint, .mascot, .floaty, .music-toggle.playing .note-icon, .music-bars span, .hero .age, .mascot-bubble, .intro-sparkle, .envelope-scene{ animation:none !important; }
   }
 </style>
 </head>
@@ -489,9 +662,20 @@
 
 <div class="intro-overlay" id="introOverlay">
   <div class="intro-inner">
+    <div class="intro-sparkles" id="introSparkles"></div>
     <p class="intro-label" data-c="introLabel"></p>
     <p class="intro-title" data-c="introTitle"></p>
-    <button class="intro-btn" id="introBtn" data-c="introBtn"></button>
+
+    <div class="envelope-wrap" id="envelopeBtn" role="button" tabindex="0" aria-label="Buka amplopnya">
+      <div class="envelope-scene">
+        <div class="envelope-letter"></div>
+        <div class="envelope-body">
+          <span class="envelope-seal">🖤</span>
+        </div>
+        <div class="envelope-flap"></div>
+      </div>
+    </div>
+    <p class="envelope-hint" data-c="introBtn"></p>
   </div>
 </div>
 
@@ -505,11 +689,18 @@
 
   <section class="hero">
     <span class="eyebrow" data-c="heroEyebrow"></span>
-    <p class="age" data-c="heroAge"></p>
+    <div class="age-wrap">
+      <div class="age-candles">
+        <div class="mini-candle"><div class="mini-flame"></div><div class="mini-stick"></div></div>
+        <div class="mini-candle"><div class="mini-flame"></div><div class="mini-stick"></div></div>
+      </div>
+      <p class="age" data-c="heroAge"></p>
+      <div class="age-sparkles" id="ageSparkles"></div>
+    </div>
     <h1 class="headline" data-c="heroHeadline"></h1>
     <p class="sub" data-c="heroSub"></p>
 
-    <div class="mascot-holder">
+    <div class="mascot-holder" id="mascotHolder">
       <svg class="mascot" id="mascot" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <ellipse cx="60" cy="108" rx="30" ry="6" fill="#000" opacity="0.25"/>
         <path d="M60 20c26 0 42 18 42 44s-18 46-42 46-42-20-42-46S34 20 60 20z" fill="#f4ecd9"/>
@@ -582,17 +773,15 @@
 const CONTENT = {
 
   // ===== LAYAR PEMBUKA (tap untuk masuk + nyalain musik) =====
-  introLabel: "untuk abang",
-  introTitle: "Ada sesuatu buat kamu.",
-  introBtn: "tekan untuk membuka",
+  introTitle: "klik.",
+  introBtn: "tekan amplopnya untuk membuka",
 
   // ===== HERO (bagian paling atas) =====
   heroAge: "24",
-  heroHeadline: "Selamat ulang tahun, Sayang.",
+  heroHeadline: "Happy Birthday, Sayang.",
   heroSub: "Pelan-pelan aja scrollnya. Ada beberapa hal yang mau aku sampaikan.",
 
   // ===== NOTE 1 =====
-  note1Label: "untuk abang",
   note1Body: `
     <p>Selamat ulang tahun, abang.</p>
   `,
@@ -627,6 +816,15 @@ const CONTENT = {
   // ===== MUSIK =====
   musicOff: "putar musik",
   musicOn: "sedang diputar",
+
+  // ===== BALON KATA MASKOT (klik maskotnya, gantian munculnya) =====
+  mascotReplies: [
+    "hehe kaget ga",
+    "iya iya aku tau abang ganteng",
+    "udah ih jangan diklik² mulu",
+    "abang mau apa sih",
+    "aku sayang abang lho",
+  ],
 };
 
 // --- render semua teks dari CONTENT ke halaman ---
@@ -643,6 +841,7 @@ document.querySelectorAll('[data-c-html]').forEach(el=>{
 const candleBtn = document.getElementById('candleBtn');
 const letterBox = document.getElementById('letterBox');
 const mascot = document.getElementById('mascot');
+const mascotHolder = document.getElementById('mascotHolder');
 candleBtn.addEventListener('click', ()=>{
   if(candleBtn.classList.contains('blown')) return;
   candleBtn.classList.add('blown');
@@ -654,7 +853,7 @@ candleBtn.addEventListener('click', ()=>{
   }, 500);
 });
 
-// --- maskot: kedip pelan-pelan tiap beberapa detik, loncat kalau di-tap ---
+// --- maskot: kedip pelan-pelan tiap beberapa detik, loncat + ngomong kalau di-tap ---
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(!reduceMotion){
   setInterval(()=>{
@@ -662,10 +861,42 @@ if(!reduceMotion){
     setTimeout(()=> mascot.classList.remove('blink'), 160);
   }, 2600 + Math.random()*1400);
 }
+
+let mascotClickCount = 0;
 mascot.addEventListener('click', ()=>{
   mascot.classList.add('jump');
   setTimeout(()=> mascot.classList.remove('jump'), 950);
+
+  // balon kata gantian tiap diklik biar ga berasa mesin
+  const replies = CONTENT.mascotReplies;
+  const bubble = document.createElement('div');
+  bubble.className = 'mascot-bubble';
+  bubble.textContent = replies[mascotClickCount % replies.length];
+  mascotHolder.appendChild(bubble);
+  setTimeout(()=> bubble.remove(), 1600);
+  mascotClickCount++;
 });
+
+// --- kelip bintang kecil di sekitar angka umur ---
+if(!reduceMotion){
+  const ageSparkles = document.getElementById('ageSparkles');
+  const sparkleGlyphs = ['✦','✧','·'];
+  const sparklePositions = [
+    {top:'4%', left:'2%'}, {top:'12%', left:'92%'},
+    {top:'78%', left:'0%'}, {top:'85%', left:'96%'},
+    {top:'2%', left:'48%'}, {top:'92%', left:'50%'},
+    {top:'40%', left:'-2%'}, {top:'38%', left:'100%'},
+  ];
+  sparklePositions.forEach((pos, i)=>{
+    const s = document.createElement('span');
+    s.className = 'age-sparkle';
+    s.textContent = sparkleGlyphs[i % sparkleGlyphs.length];
+    s.style.top = pos.top;
+    s.style.left = pos.left;
+    s.style.animationDelay = (i * 0.35) + 's';
+    ageSparkles.appendChild(s);
+  });
+}
 
 // --- hati & bintang kecil yang melayang pelan di background ---
 if(!reduceMotion){
@@ -708,17 +939,47 @@ musicToggle.addEventListener('click', ()=>{
   }
 });
 
-// --- layar pembuka: sentuhan pertama = buka halaman + langsung nyalain musik ---
+// --- kelip bintang kecil tersebar di layar pembuka ---
+if(!reduceMotion){
+  const introSparkles = document.getElementById('introSparkles');
+  const introGlyphs = ['✦','✧','·'];
+  const introPositions = [
+    {top:'6%', left:'8%'}, {top:'14%', left:'86%'},
+    {top:'82%', left:'12%'}, {top:'88%', left:'82%'},
+    {top:'46%', left:'2%'}, {top:'40%', left:'96%'},
+    {top:'4%', left:'46%'}, {top:'94%', left:'50%'},
+  ];
+  introPositions.forEach((pos, i)=>{
+    const s = document.createElement('span');
+    s.className = 'intro-sparkle';
+    s.textContent = introGlyphs[i % introGlyphs.length];
+    s.style.top = pos.top;
+    s.style.left = pos.left;
+    s.style.animationDelay = (i * 0.3) + 's';
+    introSparkles.appendChild(s);
+  });
+}
+
+// --- layar pembuka: buka amplopnya = flap kebuka dulu, baru halaman fade + musik nyala ---
 // (browser mewajibkan ada interaksi pengguna sebelum audio boleh bunyi,
 // jadi ini cara paling dekat dengan "musik langsung keputer")
 const introOverlay = document.getElementById('introOverlay');
-const introBtn = document.getElementById('introBtn');
+const envelopeBtn = document.getElementById('envelopeBtn');
+let introOpened = false;
 
 function openIntro(){
-  bgMusic.play().then(()=> setPlayingState(true)).catch(()=> setPlayingState(false));
-  introOverlay.classList.add('hidden');
+  if(introOpened) return;
+  introOpened = true;
+  envelopeBtn.classList.add('opening');
+  setTimeout(()=>{
+    bgMusic.play().then(()=> setPlayingState(true)).catch(()=> setPlayingState(false));
+    introOverlay.classList.add('hidden');
+  }, 680);
 }
-introBtn.addEventListener('click', openIntro);
+envelopeBtn.addEventListener('click', openIntro);
+envelopeBtn.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openIntro(); }
+});
 introOverlay.addEventListener('click', (e)=>{
   if(e.target === introOverlay) openIntro();
 });
