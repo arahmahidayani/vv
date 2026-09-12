@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Untuk Abang</title>
+<title>ILY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Karla:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -355,18 +355,42 @@
   .mascot-holder{
     margin-top:28px;
     display:flex;
-    justify-content:center;
+    flex-direction:column;
+    align-items:center;
     position:relative;
+  }
+  .mascot-glow{
+    position:absolute;
+    top:0; left:50%;
+    transform:translate(-50%,-6%);
+    width:130px; height:130px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(243,206,135,.22) 0%, transparent 70%);
+    animation: glowPulse 2.4s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes glowPulse{
+    0%,100%{ opacity:.4; transform:translate(-50%,-6%) scale(.92); }
+    50%{ opacity:.85; transform:translate(-50%,-6%) scale(1.08); }
   }
   .mascot{
     width:108px; height:108px;
-    animation: breathe 3.4s ease-in-out infinite;
+    animation: breathe 3.4s ease-in-out infinite, nudge 6s ease-in-out infinite;
     transform-origin:50% 85%;
     cursor:pointer;
+    position:relative;
+    z-index:1;
   }
   @keyframes breathe{
     0%,100%{ transform:scale(1,1) translateY(0); }
     50%{ transform:scale(1.035,0.965) translateY(-3px); }
+  }
+  @keyframes nudge{
+    0%, 82%, 100%{ transform:rotate(0deg); }
+    85%{ transform:rotate(-6deg); }
+    88%{ transform:rotate(5deg); }
+    91%{ transform:rotate(-4deg); }
+    94%{ transform:rotate(0deg); }
   }
   .mascot .eye{ transition:transform .12s ease; transform-origin:center; }
   .mascot.blink .eye{ transform:scaleY(0.12); }
@@ -378,6 +402,23 @@
     65%{ transform:translateY(0) scale(0.94,1.08); }
     85%{ transform:translateY(-6px) scale(1.02,0.98); }
     100%{ transform:translateY(0) scale(1,1); }
+  }
+  .tap-hint{
+    margin-top:10px;
+    font-size:12px;
+    color:var(--gold);
+    letter-spacing:.02em;
+    opacity:0;
+    animation: hintFade 2.6s ease-in-out infinite;
+    transition:opacity .4s ease;
+  }
+  @keyframes hintFade{
+    0%,100%{ opacity:.15; }
+    50%{ opacity:.85; }
+  }
+  .mascot-holder.tapped .tap-hint{
+    animation:none;
+    opacity:0;
   }
 
   /* --- balon obrolan random pas maskot diklik --- */
@@ -649,7 +690,7 @@
   }
 
   @media (prefers-reduced-motion: reduce){
-    .flame, .scroll-hint, .mascot, .floaty, .music-toggle.playing .note-icon, .music-bars span, .hero .age, .mascot-bubble, .intro-sparkle, .envelope-scene{ animation:none !important; }
+    .flame, .scroll-hint, .mascot, .floaty, .music-toggle.playing .note-icon, .music-bars span, .hero .age, .mascot-bubble, .intro-sparkle, .envelope-scene, .mascot-glow, .tap-hint{ animation:none !important; }
   }
 </style>
 </head>
@@ -701,6 +742,7 @@
     <p class="sub" data-c="heroSub"></p>
 
     <div class="mascot-holder" id="mascotHolder">
+      <div class="mascot-glow"></div>
       <svg class="mascot" id="mascot" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <ellipse cx="60" cy="108" rx="30" ry="6" fill="#000" opacity="0.25"/>
         <path d="M60 20c26 0 42 18 42 44s-18 46-42 46-42-20-42-46S34 20 60 20z" fill="#f4ecd9"/>
@@ -720,6 +762,7 @@
         <path d="M46 34c4-8 24-8 28 0" stroke="#cf9f52" stroke-width="3" fill="none" stroke-linecap="round"/>
         <path d="M55 30l5-9 5 9z" fill="#cf9f52"/>
       </svg>
+      <span class="tap-hint">ketuk aku</span>
     </div>
 
     <p class="from" data-c="heroFrom"></p>
@@ -779,7 +822,7 @@ const CONTENT = {
   // ===== HERO (bagian paling atas) =====
   heroAge: "24",
   heroHeadline: "Happy Birthday, Sayang.",
-  heroSub: "Pelan-pelan aja scrollnya. Ada beberapa hal yang mau aku sampaikan.",
+  heroSub: "Pelan-pelan aja scrollnya.",
 
   // ===== NOTE 1 =====
   note1Body: `
@@ -787,10 +830,9 @@ const CONTENT = {
   `,
 
   // ===== NOTE 2 =====
-  note2Label: "sedikit cerita",
   note2Body: `
     <p>Di umur yang baru ini, aku cuma ingin bilang terima kasih sudah bertahan sejauh ini.</p>
-    <p>Tidak semua hal perlu diucapkan setiap hari untuk terasa nyata, tapi aku sayang kamu, <em>lebih</em> dari yang biasa aku tunjukkan.</p>
+    <p>Tidak semua hal perlu diucapkan setiap hari untuk terasa nyata, tapi aku bangga banget sama abang, <em>lebih</em> dari yang biasa aku tunjukkan.</p>
   `,
 
   // ===== BAGIAN LILIN (interaktif) =====
@@ -799,14 +841,15 @@ const CONTENT = {
   candleCaption: "(tekan lilinnya)",
 
   // ===== SURAT / PESAN UTAMA =====
-  letterTo: "untuk abang",
-  letterTitle: "Selamat ulang tahun yang ke-24, abang sayang.",
+  letterTo: "Dibaca ya abang",
+  letterTitle: "Selamat ulang tahun abang sayang.",
   letterBody: `
     <p>Semoga di usia yang baru ini, abang selalu sehat, urusannya dimudahkan, dan pelan-pelan semua yang diimpikan bisa tercapai.</p>
+    <p>Aamiin</p>
     <p>Aku mungkin belum jadi yang paling sempurna buat abang, tapi aku selalu berusaha memberi yang terbaik.</p>
     <p>Terima kasih untuk waktunya selama ini.</p>
     <p>Semoga masih ada banyak cerita lain yang menanti kita.</p>
-    <p>Sekali lagi, selamat ulang tahun, abang.</p>
+    <p>Sekali lagi, selamat ulang tahun, sayanng.</p>
   `,
   letterSign: "I love you.",
 
@@ -866,6 +909,7 @@ let mascotClickCount = 0;
 mascot.addEventListener('click', ()=>{
   mascot.classList.add('jump');
   setTimeout(()=> mascot.classList.remove('jump'), 950);
+  mascotHolder.classList.add('tapped');
 
   // balon kata gantian tiap diklik biar ga berasa mesin
   const replies = CONTENT.mascotReplies;
